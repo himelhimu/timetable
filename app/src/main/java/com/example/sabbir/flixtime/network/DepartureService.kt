@@ -1,6 +1,7 @@
 package com.example.sabbir.flixtime.network
 
 import com.example.sabbir.flixtime.models.TimeTable
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.GET
 

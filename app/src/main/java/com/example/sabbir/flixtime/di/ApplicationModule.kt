@@ -1,6 +1,9 @@
 package com.example.sabbir.flixtime.di
 
+import com.example.sabbir.flixtime.models.Departure
+import com.example.sabbir.flixtime.models.TimeTable
 import com.example.sabbir.flixtime.network.DepartureService
+import com.example.sabbir.flixtime.utils.DepartureJSONDeserilizer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,6 +15,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import com.google.gson.Gson
+
+import com.google.gson.GsonBuilder
+
+
+
 
 /**
  * Created by himelhimu on 12/17/2021
@@ -20,13 +29,11 @@ import javax.inject.Singleton
  * However the individual libraries used in here might have their own licensing.
  */
 
-const val BASE_URL ="https://global.api-dev.flixbus.com"
+const val BASE_URL = "https://global.api-dev.flixbus.com"
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
-
-
 
 
     @Singleton
@@ -59,12 +66,15 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideApiService(okHttpClient: OkHttpClient) : DepartureService{
+    fun provideApiService(okHttpClient: OkHttpClient): DepartureService {
+        val gsonBuilder = GsonBuilder()
+        gsonBuilder.registerTypeAdapter(TimeTable::class.java, DepartureJSONDeserilizer())
+        val gson = gsonBuilder.create()
 
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build().create(DepartureService::class.java)
     }
 

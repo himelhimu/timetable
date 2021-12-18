@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.sabbir.flixtime.databinding.MainActivityBinding
+import com.example.sabbir.flixtime.models.Departure
 import com.example.sabbir.flixtime.ui.main.MainViewModel
+import com.example.sabbir.flixtime.ui.main.TimeTableAdapter
 import com.example.sabbir.flixtime.utils.showShortToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,8 +24,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.getDepartureList()
         viewModel.apiResponse.observe(this, {
             if (it.data != null) {
-                showShortToast(it.message)
+                setUpAdapter(it.data)
             } else showShortToast(it.message)
         })
+    }
+
+    fun setUpAdapter(itemList:List<Departure>){
+        binding.rcvStationList.adapter = TimeTableAdapter(itemList)
     }
 }

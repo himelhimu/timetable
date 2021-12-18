@@ -1,5 +1,7 @@
 package com.example.sabbir.flixtime.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Created by himelhimu on 12/17/2021
  * @author Md Sabbir Ahmed
@@ -7,4 +9,5 @@ package com.example.sabbir.flixtime.models
  * However the individual libraries used in here might have their own licensing.
  */
 
-data class TimeTable(val departureList:List<Departure>)
+data class TimeTable(
+    val departureList:List<Departure>)

@@ -1,6 +1,7 @@
 package com.example.sabbir.flixtime.network
 
 import com.example.sabbir.flixtime.models.TimeTable
+import retrofit2.Response
 import retrofit2.http.GET
 
 /**
@@ -13,5 +14,5 @@ import retrofit2.http.GET
 interface DepartureService {
 
     @GET("mobile/v1/network/station/1/timetable.json")
-    suspend fun getDepartureList():TimeTable
+    suspend fun getDepartureList():Response<TimeTable>
 }

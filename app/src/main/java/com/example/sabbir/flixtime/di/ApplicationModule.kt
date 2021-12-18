@@ -50,7 +50,7 @@ class ApplicationModule {
         return Interceptor { chain ->
             val original = chain.request()
             val builder = original.newBuilder()
-            val request = builder.header("X-Api-Authentication", "ntervIEW_TOK3n")
+            val request = builder.header("X-Api-Authentication", "intervIEW_TOK3n")
                 .method(original.method, original.body)
                 .build()
             chain.proceed(request)
@@ -59,7 +59,7 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideApiService(okHttpClient: OkHttpClient,BASE_URL:String) : DepartureService{
+    fun provideApiService(okHttpClient: OkHttpClient) : DepartureService{
 
         return Retrofit.Builder()
             .client(okHttpClient)

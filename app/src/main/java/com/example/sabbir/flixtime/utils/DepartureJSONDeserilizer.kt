@@ -29,22 +29,24 @@ class DepartureJSONDeserilizer : JsonDeserializer<TimeTable> {
         typeOfT: Type?,
         context: JsonDeserializationContext?
     ): TimeTable {
-
-
-
-        val time = json!!.asJsonObject
-        val dprt = time["timetable"].asJsonObject.getAsJsonArray("departures")
-
         val list = mutableListOf<Departure>()
-        if (!dprt.isEmpty)
-            for (obj in dprt!!) {
-            val jsonObj = obj.asJsonObject
-            val jsonObjDate = jsonObj!!["datetime"].asJsonObject
-            val d = Departure(
-                jsonObj["line_code"].asString, jsonObj["direction"].asString,
-                DateTime(jsonObjDate["tz"].asString, jsonObjDate["timestamp"].asLong)
-            )
-            list.add(d)
+        try {
+            val time = json!!.asJsonObject
+            val dprt = time["timetable"].asJsonObject.getAsJsonArray("departures")
+
+            if (!dprt.isEmpty)
+                for (obj in dprt!!) {
+                    val jsonObj = obj.asJsonObject
+                    val jsonObjDate = jsonObj!!["datetime"].asJsonObject
+                    val d = Departure(
+                        jsonObj["line_code"].asString, jsonObj["direction"].asString,
+                        DateTime(jsonObjDate["tz"].asString, jsonObjDate["timestamp"].asLong)
+                    )
+                    list.add(d)
+                }
+
+        } catch (e: Exception) {
+
         }
         return TimeTable(list)
     }

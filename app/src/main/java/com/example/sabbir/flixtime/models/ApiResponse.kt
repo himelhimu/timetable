@@ -7,4 +7,4 @@ package com.example.sabbir.flixtime.models
  * However the individual libraries used in here might have their own licensing.
  */
 
-data class ApiResponse<out T>(val data:T?,val message:String)
+data class ApiResponse<out T>(val data:T?,val message:String?)

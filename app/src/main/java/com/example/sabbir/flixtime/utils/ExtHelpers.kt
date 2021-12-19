@@ -5,6 +5,10 @@ import android.widget.Toast
 import com.example.sabbir.flixtime.models.DateTime
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.core.content.ContextCompat.getSystemService
+
+import android.net.ConnectivityManager
+import androidx.core.content.ContextCompat
 
 
 /**
@@ -17,6 +21,7 @@ import java.util.*
 fun Context.showShortToast(message:String){
     Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
 }
+
 
 
 fun convertToHumanReadableDateTime(dateTime:DateTime):String{

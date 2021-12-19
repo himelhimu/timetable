@@ -13,7 +13,7 @@ import com.example.sabbir.flixtime.models.Departure
  * However the individual libraries used in here might have their own licensing.
  */
 
-class TimeTableAdapter(private val itemList:List<Departure>) : RecyclerView.Adapter<TimeTableViewHolder>() {
+class TimeTableAdapter(private val itemList:ArrayList<Departure>) : RecyclerView.Adapter<TimeTableViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeTableViewHolder {
         val binding = StationListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -22,6 +22,16 @@ class TimeTableAdapter(private val itemList:List<Departure>) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: TimeTableViewHolder, position: Int) {
         holder.bind(itemList[position])
+    }
+
+    fun clear(){
+        itemList.clear()
+        notifyDataSetChanged()
+    }
+
+    fun addAll(items:List<Departure>){
+        itemList.addAll(items)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = itemList.size

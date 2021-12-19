@@ -22,7 +22,7 @@ class MainViewModel @Inject constructor(private val departureService: DepartureS
     private var _items = MutableLiveData<List<Departure>>().apply { value = emptyList() }
     val departureList: LiveData<List<Departure>> = _items
     private var _apiResponse = MutableLiveData<ApiResponse<List<Departure>>>().apply {
-        value = ApiResponse(emptyList(), "Error no data found,try again")
+        value = ApiResponse(emptyList(), null)
     }
     val apiResponse: LiveData<ApiResponse<List<Departure>>> = _apiResponse
 
@@ -42,26 +42,6 @@ class MainViewModel @Inject constructor(private val departureService: DepartureS
             } else {
                 _apiResponse.postValue(ApiResponse(null, "sgsfgs"))
             }
-
-            /*val json = departureService.getDepartureList().string()
-            val response = departureService.getDepartureList()
-            if (response!=null) {
-                val gsonBuilder = GsonBuilder()
-                gsonBuilder.registerTypeAdapter(TimeTable::class.java, DepartureJSONDeserilizer())
-                val gson = gsonBuilder.create()
-                val item:TimeTable = gson.fromJson(json,TimeTable::class.java)
-                *//*val timeTable = response.body()*//*
-                if (item != null) {
-                    _apiResponse.postValue(
-                        ApiResponse(
-                            item.departureList,
-                            "Data received successfully"
-                        )
-                    )
-                } else _apiResponse.postValue(ApiResponse(null, "sgsfgs"))
-            } else {
-                _apiResponse.postValue(ApiResponse(null, "sgsfgs"))
-            }*/
         }
     }
 }

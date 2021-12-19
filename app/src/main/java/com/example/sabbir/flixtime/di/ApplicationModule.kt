@@ -1,9 +1,10 @@
 package com.example.sabbir.flixtime.di
 
-import com.example.sabbir.flixtime.models.Departure
+import com.example.sabbir.flixtime.BuildConfig
 import com.example.sabbir.flixtime.models.TimeTable
 import com.example.sabbir.flixtime.network.DepartureService
 import com.example.sabbir.flixtime.utils.DepartureJSONDeserilizer
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,11 +16,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-import com.google.gson.Gson
-
-import com.google.gson.GsonBuilder
-
-
 
 
 /**
@@ -39,13 +35,15 @@ class ApplicationModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient {
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        // only for development purposes
+        // should not be added in prod
+        /*val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY*/
 
         val builder = OkHttpClient.Builder()
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
-            .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(interceptor)
 
         return builder.build()
@@ -57,7 +55,7 @@ class ApplicationModule {
         return Interceptor { chain ->
             val original = chain.request()
             val builder = original.newBuilder()
-            val request = builder.header("X-Api-Authentication", "intervIEW_TOK3n")
+            val request = builder.header("X-Api-Authentication", BuildConfig.API_TOKEN)
                 .method(original.method, original.body)
                 .build()
             chain.proceed(request)

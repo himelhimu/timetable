@@ -19,8 +19,6 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val departureService: DepartureService) :
     ViewModel() {
 
-    private var _items = MutableLiveData<List<Departure>>().apply { value = emptyList() }
-    val departureList: LiveData<List<Departure>> = _items
     private var _apiResponse = MutableLiveData<ApiResponse<List<Departure>>>().apply {
         value = ApiResponse(emptyList(), null)
     }
@@ -38,9 +36,9 @@ class MainViewModel @Inject constructor(private val departureService: DepartureS
                             "Data received successfully"
                         )
                     )
-                } else _apiResponse.postValue(ApiResponse(null, "sgsfgs"))
+                } else _apiResponse.postValue(ApiResponse(null, "No data available, please try again later!"))
             } else {
-                _apiResponse.postValue(ApiResponse(null, "sgsfgs"))
+                _apiResponse.postValue(ApiResponse(null, response.errorBody().toString()))
             }
         }
     }

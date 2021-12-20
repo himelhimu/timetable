@@ -1,4 +1,4 @@
-package com.example.sabbir.flixtime
+package com.example.sabbir.flixtime.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sabbir.flixtime.databinding.MainActivityBinding
 import com.example.sabbir.flixtime.models.Departure
-import com.example.sabbir.flixtime.ui.main.MainViewModel
-import com.example.sabbir.flixtime.ui.main.TimeTableAdapter
 import com.example.sabbir.flixtime.utils.NetworkConnectionDetector
 import com.example.sabbir.flixtime.utils.isInternetAvailable
 import com.example.sabbir.flixtime.utils.showShortToast
@@ -72,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     private fun subscribeToNetworkChanges() {
         NetworkConnectionDetector(this).observe(this, { isConnected ->
             if (isConnected) {
-                showShortToast("Internet connection resotred!")
+                showShortToast("Internet connection restored!")
                 binding.progressCircular.visibility = View.VISIBLE
                 viewModel.getDepartureList()
             }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TimeTable</string>
+    <string name="no_data_available_nplease_pull_to_refresh">No data available.\nPlease pull to refresh</string>
 </resources>

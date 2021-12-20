@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlixTime">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

@@ -18,18 +18,17 @@ import androidx.core.content.ContextCompat
  * However the individual libraries used in here might have their own licensing.
  */
 
-fun Context.showShortToast(message:String){
-    Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+fun Context.showShortToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
 
-
-fun convertToHumanReadableDateTime(dateTime:DateTime):String{
+fun convertToHumanReadableDateTime(dateTime: DateTime): String {
 
     try {
         val calendar: Calendar = Calendar.getInstance()
         val tz: TimeZone = TimeZone.getTimeZone(dateTime.timeZone)
-        calendar.timeInMillis = dateTime.timeStamp*1000
+        calendar.timeInMillis = dateTime.timeStamp * 1000
         calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.timeInMillis))
         val sdf = SimpleDateFormat("HH:mm")
         val currenTimeZone: Date = calendar.time as Date

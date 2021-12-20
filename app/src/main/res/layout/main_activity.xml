@@ -38,6 +38,6 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No data available.\nPlease pull to refresh" />
+        android:text="@string/no_data_available_nplease_pull_to_refresh" />
 
 </FrameLayout>
